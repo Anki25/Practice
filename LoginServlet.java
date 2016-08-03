@@ -1,7 +1,6 @@
-package com.niit.shoppingcart;
+package p1;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,53 +15,32 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default constructor. 
      */
     public LoginServlet() {
-        super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userID= request.getParameter("userID");
-		String password= request.getParameter("password");
-	      
-		LoginDAO loginDAO = new LoginDAO();
-		
-		RequestDispatcher dispatcher;
-		
-		if( loginDAO.isValidUser(userID , password) == true)
-          {
-	//Navigate to home page
-			dispatcher = request.getRequestDispatcher("home.html");
-			dispatcher.forward(request,  response);
-	       }
-		else
+		String str1=request.getParameter("txtname");
+		String str2=request.getParameter("txtpass");
+		//String str3=request.getParameter("txtcpass");
+		if(str1.equals("NIIT")&&str2.equals("NIIT"))
 		{
-		//Navigate to login
-		//include error message
-		System.out.println("Invalid Credentials");
-		//it will print on eclipse console..not on browser
-		PrintWriter writer = response.getWriter();
-		writer.println("Please enter valid credentials");
-		dispatcher = request.getRequestDispatcher("Login.html");
-		dispatcher.include(request,  response);
-
+			RequestDispatcher rd=request.getRequestDispatcher("WELCOME.html");
+			rd.forward(request, response);
+		}else
+		{
+			RequestDispatcher rd=request.getRequestDispatcher("login.html");
+			rd.forward(request, response);
+		}
+	
 	}
 
-}
 }
